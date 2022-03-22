@@ -1,0 +1,24 @@
+{
+  "name": "kalendarfrizerajnapredne",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StefanVidacak03/kalendarfrizerajnapredne.git"
+  },
+  "author": "stjepanvidacak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StefanVidacak03/kalendarfrizerajnapredne/issues"
+  },
+  "homepage": "https://github.com/StefanVidacak03/kalendarfrizerajnapredne#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
