@@ -1,36 +1,35 @@
-var express = require('express');
-var mysql = require('mysql2');
-var ejs = require('ejs');
-var https = require('https');
-const { getMaxListeners } = require('process');
-const { rootCertificates } = require('tls');
-var app = express();
-
+const express = require('express');
+const app = express();
+const path = require('path');
+const router = express.Router();
+var mysql = require("mysql2")
+const multer = require('multer');
+app.use(express.static('public'));
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: 'root', // So secure way to do this
     password: 'St3f@n!!',
     database: 'frizeraj'
+  });
+  
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+;
+app.set('views', './views');
+app.set('view engine', 'ejs')
+app.use('/', express.static(__dirname + 'public'))
+
+app.get('/', (req, res) => {
+    res.render("index")
 });
 
-connection.connect();
-app.use(express.static('views'));
-app.set('view engine', 'ejs');
+app.post('/index', multer().none(), (req,res)=>{
 
-//app.get('/', (req, res) => {
-  //  res.render('index');
-//});
-
-
- app.get('/', (req, res) => {
-
-     connection.query('SELECT * from klijent', function (err, result) {
-         if (err) throw err;
-         res.render('index', { REZULTAT: result });
-         if(err) throw err;
-         console.log(result);
-     });
-
- });
-
-app.listen(3000);
+    connection.query("INSERT INTO termin (Dan, Sat, klijent_idklijent, cena) VALUES ('" + req.body.datum + "', '" +req.body.sat+ "', '" + req.body.klijent + "', '" +req.body.cena+ "')",
+    function (err, rows, fields) {
+  
+        if (err) throw err;
+  
+        res.send("Upisano je u bazu");
+    });
+  })
+app.listen(5000);
